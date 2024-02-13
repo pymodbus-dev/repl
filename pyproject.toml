@@ -8,20 +8,126 @@ packages = [{include = "pymodbus"}]
 
 [tool.poetry.dependencies]
 python = "^3.8"
-aiohttp = "^3.9.3"
 typer = {extras = ["all"], version = "^0.9.0"}
 prompt-toolkit = "^3.0.43"
 pygments = "^2.17.2"
+pytest-xdist = "^3.5.0"
+
+[[tool.poetry.dependencies.aiohttp]]
+python="3.12"
+version=">=3.9.0b0"
+
+
+[[tool.poetry.dependencies.aiohttp]]
+python="<3.12"
+version=">=3.8.6"
+
 
 [tool.setuptools.packages.find]
 include = ["pymodbus.repl"]
 
 [tool.poetry.group.dev.dependencies]
 pymodbus = "^3.6.4"
+ruff = "^0.2.1"
+coverage = "^7.4.1"
+pytest-cov = "^4.1.0"
 
 [build-system]
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
+
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "--cov-report html"
+
+[tool.coverage.run]
+source = [
+    "pymodbus/"
+]
+omit = ["examples/contrib/"]
+branch = true
+
+[tool.coverage.report]
+exclude_also = [
+    "except ImportError:",
+    "_check_system_health",
+    "if __name__ == .__main__.:",
+    ]
+skip_covered = true
+fail_under = 70.0
+
+[tool.coverage.html]
+directory = "build/cov"
+
+
+[tool.codespell]
+skip = "./build,./doc/source/_static,venv,.venv,.git,htmlcov,CHANGELOG.rst,.mypy_cache"
+ignore-words-list = "asend"
+
+[tool.ruff]
+target-version="py38"
+exclude = [
+    "venv",
+    ".venv",
+    ".git",
+    "build",
+    "doc",
+    "contrib"
+]
+line-length = 88
+# indent-width = 4
+
+[tool.ruff.lint]
+ignore = [
+    "E501",  # line too long
+    "E731",  # lambda expressions
+    "S101",  # Use of `assert`
+    "S311",  # PRNG for cryptography
+    "S104",  # binding on all interfaces
+    "RUF012",  # typing.ClassVar
+    "RUF015"  # next(iter(list)) instead of list[0]
+]
+select = [
+    "B007",   # Loop control variable {name} not used within loop body
+    "B014",   # Exception handler with duplicate exception
+    "C",      # complexity
+    "D",      # docstrings
+    "E",      # pycodestyle errors
+    "F",      # pyflakes
+    "I",      # isort
+    "PGH",    # pygrep-hooks
+    "PLC",    # pylint
+    "PT",     # flake8-pytest-style
+    "RUF",    # ruff builtins
+    "S",      # bandit
+    "SIM105", # flake8-simplify
+    "SIM117", #
+    "SIM118", #
+    "SIM201", #
+    "SIM212", #
+    "SIM300", #
+    "SIM401", #
+    "UP",     # pyupgrade
+    "W",      # pycodestyle warnings
+    # "TRY",    # tryceratops
+    "TRY004", # Prefer TypeError exception for invalid type
+]
+fixable = ["ALL"]
+unfixable = []
+
+[tool.ruff.lint.pydocstyle]
+convention = "pep257"
+
+[tool.ruff.lint.isort]
+lines-after-imports = 2
+known-local-folder = []
+
+[tool.ruff.format]
+quote-style = "double"
+indent-style = "space"
+skip-magic-trailing-comma = false
+line-ending = "auto"
 
 [tool.poetry.scripts]
 "pymodbus.console" = "pymodbus.repl.client.main:main"
