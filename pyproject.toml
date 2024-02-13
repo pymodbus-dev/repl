@@ -2,13 +2,27 @@
 name = "pymodbus-repl"
 version = "0.1.0"
 description = ""
-authors = ["sanjay <sanjay@turntide.com>"]
+authors = ["dhoomakethu <otlasanju@gmail.com>"]
 readme = "README.md"
+packages = [{include = "pymodbus"}]
 
 [tool.poetry.dependencies]
-python = "^2.7"
+python = "^3.8"
+aiohttp = "^3.9.3"
+typer = {extras = ["all"], version = "^0.9.0"}
+prompt-toolkit = "^3.0.43"
+pygments = "^2.17.2"
 
+[tool.setuptools.packages.find]
+include = ["pymodbus.repl"]
+
+[tool.poetry.group.dev.dependencies]
+pymodbus = "^3.6.4"
 
 [build-system]
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
+
+[tool.poetry.scripts]
+"pymodbus.console" = "pymodbus.repl.client.main:main"
+"pymodbus.server" = "pymodbus.repl.server.main:app"
