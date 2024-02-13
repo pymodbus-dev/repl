@@ -1,0 +1,14 @@
+[tool.poetry]
+name = "pymodbus-repl"
+version = "0.1.0"
+description = ""
+authors = ["sanjay <sanjay@turntide.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^2.7"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
