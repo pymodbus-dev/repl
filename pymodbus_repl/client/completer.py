@@ -6,7 +6,7 @@ from prompt_toolkit.completion import Completer, Completion
 from prompt_toolkit.filters import Condition
 from prompt_toolkit.styles import Style
 
-from pymodbus.repl.client.helper import get_commands
+from pymodbus_repl.client.helper import get_commands
 
 
 @Condition
