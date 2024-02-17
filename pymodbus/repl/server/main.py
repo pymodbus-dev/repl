@@ -142,7 +142,7 @@ def run(
     ),
     modbus_port: str = typer.Option("5020", "--modbus-port", "-p", help="Modbus port"),
     modbus_slave_id: Annotated[Optional[List[int]], typer.Option(
-        "--slave-id", "-u", help="Supported Modbus slave id's"
+        "--unit-id", "-u", help="Supported Modbus slave id's"
     )] = [1],
     modbus_config_path: Annotated[Path, typer.Option(
         help="Path to additional modbus server config"
