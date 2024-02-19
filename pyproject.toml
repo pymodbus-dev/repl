@@ -1,10 +1,10 @@
 [tool.poetry]
-name = "pymodbus-repl"
+name = "pymodbus_repl"
 version = "0.1.0"
-description = ""
+description = "REPL (Read-Eval-Print Loop) tool for working with Modbus devices using the Pymodbus library."
 authors = ["dhoomakethu <otlasanju@gmail.com>"]
 readme = "README.md"
-packages = [{include = "pymodbus"}]
+packages = [{include = "pymodbus_repl"}]
 
 [tool.poetry.dependencies]
 python = "^3.8"
@@ -24,7 +24,7 @@ version=">=3.8.6"
 
 
 [tool.setuptools.packages.find]
-include = ["pymodbus.repl"]
+include = ["pymodbus_repl"]
 
 [tool.poetry.group.dev.dependencies]
 pymodbus = "^3.6.4"
@@ -130,5 +130,5 @@ skip-magic-trailing-comma = false
 line-ending = "auto"
 
 [tool.poetry.scripts]
-"pymodbus.console" = "pymodbus.repl.client.main:main"
-"pymodbus.server" = "pymodbus.repl.server.main:app"
+"pymodbus.console" = "pymodbus_repl.client.main:main"
+"pymodbus.server" = "pymodbus_repl.server.main:app"
