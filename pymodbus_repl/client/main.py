@@ -14,12 +14,12 @@ from pygments.lexers.python import PythonLexer
 
 from pymodbus import __version__ as pymodbus_version
 from pymodbus.exceptions import ParameterException
-from pymodbus.repl.client.completer import (
+from pymodbus_repl.client.completer import (
     CmdCompleter,
     has_selected_completion,
 )
-from pymodbus.repl.client.helper import CLIENT_ATTRIBUTES, Result
-from pymodbus.repl.client.mclient import ModbusSerialClient, ModbusTcpClient
+from pymodbus_repl.client.helper import CLIENT_ATTRIBUTES, Result
+from pymodbus_repl.client.mclient import ModbusSerialClient, ModbusTcpClient
 from pymodbus.transaction import (
     ModbusAsciiFramer,
     ModbusBinaryFramer,
