@@ -6,7 +6,7 @@ from prompt_toolkit.completion import Completer, Completion
 from prompt_toolkit.filters import Condition
 from prompt_toolkit.styles import Style
 
-from pymodbus.repl.client.helper import get_commands
+from pymodbus_repl.client.helper import get_commands
 
 
 @Condition
@@ -130,6 +130,8 @@ class CmdCompleter(Completer):
 
             if " " in text:
                 command = self.arg_completions(words, word_before_cursor)
+                if not command:
+                    return
                 commands = list(command.get_completion())
                 commands = list(
                     filter(lambda cmd: not (any(cmd in x for x in words)), commands)

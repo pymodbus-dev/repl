@@ -16,7 +16,7 @@ from typing_extensions import Annotated
 from pymodbus import pymodbus_apply_logging_config
 from pymodbus.framer.socket_framer import ModbusSocketFramer
 from pymodbus.logging import Log
-from pymodbus.repl.server.cli import run_repl
+from pymodbus_repl.server.cli import run_repl
 from pymodbus.server.reactive.default_config import DEFAULT_CONFIG
 from pymodbus.server.reactive.main import (
     DEFAULT_FRAMER,
