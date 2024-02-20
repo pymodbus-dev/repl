@@ -114,8 +114,8 @@ def print_title():
     max_len = max(  # pylint: disable=consider-using-generator
         [len(t) for t in TITLE.split("\n")]
     )
+    title = TITLE.format(repl_version, pymodbus_version)
     if col > max_len:
-        title = TITLE.format(repl_version, pymodbus_version)
         info(title)
     else:
         print_formatted_text(
