@@ -13,6 +13,7 @@ from prompt_toolkit.styles import Style
 from pygments.lexers.python import PythonLexer
 
 from pymodbus import __version__ as pymodbus_version
+from pymodbus_repl import __VERSION__ as repl_version
 from pymodbus.exceptions import ParameterException
 from pymodbus_repl.client.completer import (
     CmdCompleter,
@@ -38,7 +39,7 @@ __________          _____             .___  __________              .__
  |    |    \___  /    Y    (  <_> ) /_/ |    |    |   \  ___/|  |_> >  |__
  |____|    / ____\____|__  /\____/\____ | /\ |____|_  /\___  >   __/|____/
            \/            \/            \/ \/        \/     \/|__|
-                                        v0.1.1 - {pymodbus_version}
+                                                v{repl_version} - Pymodbus-{pymodbus_version}
 ----------------------------------------------------------------------------
 """
 

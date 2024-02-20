@@ -8,6 +8,8 @@ from prompt_toolkit.formatted_text import HTML
 from prompt_toolkit.shortcuts import clear
 from prompt_toolkit.shortcuts.progress_bar import formatters
 from prompt_toolkit.styles import Style
+from pymodbus import __version__ as pymodbus_version
+from pymodbus_repl import __VERSION__ as repl_version
 
 
 TITLE = r"""
@@ -17,7 +19,7 @@ __________                          .______.                    _________
  |    |    \___  |  Y Y  (  <_> ) /_/ |  | \_\ \  |  /\___ \   /        \  ___/|  | \/\   /\  ___/|  | \/
  |____|    / ____|__|_|  /\____/\____ |  |___  /____//____  > /_______  /\___  >__|    \_/  \___  >__|
            \/          \/            \/      \/           \/          \/     \/                 \/
-                                                                                                    v0.1.1
+                                                                                                v{}-Pymodbus{}
 """
 
 
@@ -113,7 +115,8 @@ def print_title():
         [len(t) for t in TITLE.split("\n")]
     )
     if col > max_len:
-        info(TITLE)
+        title = TITLE.format(repl_version, pymodbus_version)
+        info(title)
     else:
         print_formatted_text(
             HTML(f'<u><b><style color="green">{SMALL_TITLE}</style></b></u>')

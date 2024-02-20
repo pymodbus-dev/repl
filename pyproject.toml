@@ -1,7 +1,7 @@
 [tool.poetry]
-name = "pymodbus-repl"
-version = "0.1.1"
-description = ""
+name = "pymodbus_repl"
+version = "2.0.0"
+description = "REPL (Read-Eval-Print Loop) tool for working with Modbus devices using the Pymodbus library."
 authors = ["dhoomakethu <otlasanju@gmail.com>"]
 readme = "README.md"
 packages = [{include = "pymodbus_repl"}]
@@ -11,7 +11,6 @@ python = "^3.8"
 typer = {extras = ["all"], version = "^0.9.0"}
 prompt-toolkit = "^3.0.43"
 pygments = "^2.17.2"
-pytest-xdist = "^3.5.0"
 
 [[tool.poetry.dependencies.aiohttp]]
 python="3.12"
@@ -30,6 +29,7 @@ include = ["pymodbus_repl"]
 pymodbus = "^3.6.4"
 ruff = "^0.2.1"
 coverage = "^7.4.1"
+pytest-xdist = "^3.5.0"
 pytest-cov = "^4.1.0"
 
 [build-system]
@@ -43,7 +43,7 @@ addopts = "--cov-report html"
 
 [tool.coverage.run]
 source = [
-    "pymodbus/"
+    "pymodbus_repl/"
 ]
 omit = ["examples/contrib/"]
 branch = true
@@ -56,6 +56,7 @@ exclude_also = [
     ]
 skip_covered = true
 fail_under = 70.0
+show_missing = true
 
 [tool.coverage.html]
 directory = "build/cov"
