@@ -1,0 +1,59 @@
+# This workflow will install Python dependencies, run tests and lint with a variety of Python versions
+# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-python
+
+name: Python package
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        #python-version: ["3.8", "3.9", "3.10", "3.11", "3.12"]
+        python-version: ["3.10"]
+
+    steps:
+    - uses: actions/checkout@v3
+    - name: Set up Python ${{ matrix.python-version }}
+      uses: actions/setup-python@v3
+      with:
+        python-version: ${{ matrix.python-version }}
+    - name: Install Poetry Action
+      uses: snok/install-poetry@v1.3.4
+            
+    #----------------------------------------------
+    #       load cached venv if cache exists
+    #----------------------------------------------
+    - name: Load cached venv
+      id: cached-poetry-dependencies
+      uses: actions/cache@v4.0.0
+      with:
+        path: .venv
+        key: venv-${{ runner.os }}-${{ steps.setup-python.outputs.python-version }}-${{ hashFiles('**/poetry.lock') }}
+    #----------------------------------------------
+    # install dependencies if cache does not exist
+    #----------------------------------------------
+    - name: Install dependencies
+      if: steps.cached-poetry-dependencies.outputs.cache-hit != 'true'
+      run: poetry install --no-interaction --no-root
+    #----------------------------------------------
+    # install your root project, if required
+    #----------------------------------------------
+    - name: Install project
+      run: poetry install --no-interaction
+    #----------------------------------------------
+    #              run test suite
+    #----------------------------------------------
+    - name: Run tests
+      run: |
+        source .venv/bin/activate
+        pytest tests/
+        coverage report
+   
