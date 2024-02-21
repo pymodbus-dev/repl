@@ -12,7 +12,6 @@ import pygments
 from prompt_toolkit import print_formatted_text
 from prompt_toolkit.formatted_text import HTML, PygmentsTokens
 from pygments.lexers.data import JsonLexer
-
 from pymodbus.payload import BinaryPayloadDecoder, Endian
 
 

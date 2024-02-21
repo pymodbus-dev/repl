@@ -10,16 +10,16 @@ from enum import Enum
 from pathlib import Path
 
 import typer
-
 from pymodbus import pymodbus_apply_logging_config
 from pymodbus.framer.socket_framer import ModbusSocketFramer
 from pymodbus.logging import Log
-from pymodbus_repl.server.cli import run_repl
 from pymodbus.server.reactive.default_config import DEFAULT_CONFIG
 from pymodbus.server.reactive.main import (
     DEFAULT_FRAMER,
     ReactiveServer,
 )
+
+from pymodbus_repl.server.cli import run_repl
 
 
 CANCELLED_ERROR = asyncio.exceptions.CancelledError

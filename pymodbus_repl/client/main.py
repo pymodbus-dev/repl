@@ -11,21 +11,21 @@ from prompt_toolkit.key_binding import KeyBindings
 from prompt_toolkit.lexers import PygmentsLexer
 from prompt_toolkit.styles import Style
 from pygments.lexers.python import PythonLexer
-
 from pymodbus import __version__ as pymodbus_version
 from pymodbus.exceptions import ParameterException
-from pymodbus_repl.client.completer import (
-    CmdCompleter,
-    has_selected_completion,
-)
-from pymodbus_repl.client.helper import CLIENT_ATTRIBUTES, Result
-from pymodbus_repl.client.mclient import ModbusSerialClient, ModbusTcpClient
 from pymodbus.transaction import (
     ModbusAsciiFramer,
     ModbusBinaryFramer,
     ModbusRtuFramer,
     ModbusSocketFramer,
 )
+
+from pymodbus_repl.client.completer import (
+    CmdCompleter,
+    has_selected_completion,
+)
+from pymodbus_repl.client.helper import CLIENT_ATTRIBUTES, Result
+from pymodbus_repl.client.mclient import ModbusSerialClient, ModbusTcpClient
 
 
 _logger = logging.getLogger()
