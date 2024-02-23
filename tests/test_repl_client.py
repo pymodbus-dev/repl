@@ -1,7 +1,7 @@
 """Test client sync."""
 from contextlib import suppress
 
-from pymodbus.server.reactive.default_config import DEFAULT_CONFIG
+from pymodbus_repl.lib.reactive import DEFAULT_CONFIG
 
 from pymodbus_repl.client.main import _process_args
 

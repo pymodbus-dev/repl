@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "pymodbus_repl"
-version = "2.0.0"
+version = "2.0.1"
 description = "REPL (Read-Eval-Print Loop) tool for working with Modbus devices using the Pymodbus library."
 authors = ["dhoomakethu <otlasanju@gmail.com>"]
 readme = "README.md"
@@ -26,7 +26,7 @@ version=">=3.8.6"
 include = ["pymodbus_repl"]
 
 [tool.poetry.group.dev.dependencies]
-pymodbus = "^3.6.4"
+pymodbus = {git = "https://github.com/pymodbus-dev/pymodbus", rev = "dev"}
 ruff = "^0.2.1"
 coverage = "^7.4.1"
 pytest-xdist = "^3.5.0"

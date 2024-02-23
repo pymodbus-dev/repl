@@ -12,7 +12,6 @@ from prompt_toolkit.lexers import PygmentsLexer
 from prompt_toolkit.styles import Style
 from pygments.lexers.python import PythonLexer
 from pymodbus import __version__ as pymodbus_version
-from pymodbus_repl import __VERSION__ as repl_version
 from pymodbus.exceptions import ParameterException
 from pymodbus.transaction import (
     ModbusAsciiFramer,
@@ -21,6 +20,7 @@ from pymodbus.transaction import (
     ModbusSocketFramer,
 )
 
+from pymodbus_repl import __VERSION__ as repl_version
 from pymodbus_repl.client.completer import (
     CmdCompleter,
     has_selected_completion,

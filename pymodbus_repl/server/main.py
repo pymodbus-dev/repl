@@ -7,20 +7,20 @@ import json
 import logging
 import sys
 from enum import Enum
-
-from typing import List, Optional
 from pathlib import Path
+from typing import List, Optional
+
 import typer
-from typing_extensions import Annotated
 from pymodbus import pymodbus_apply_logging_config
 from pymodbus.framer.socket_framer import ModbusSocketFramer
 from pymodbus.logging import Log
-from pymodbus.server.reactive.default_config import DEFAULT_CONFIG
-from pymodbus.server.reactive.main import (
+from typing_extensions import Annotated
+
+from pymodbus_repl.lib.reactive import (
+    DEFAULT_CONFIG,
     DEFAULT_FRAMER,
     ReactiveServer,
 )
-
 from pymodbus_repl.server.cli import run_repl
 
 
@@ -144,7 +144,7 @@ def run(
     modbus_slave_id: Annotated[Optional[List[int]], typer.Option(
         "--unit-id", "-u", help="Supported Modbus slave id's"
     )] = [1],
-    modbus_config_path: Annotated[Path, typer.Option(
+    modbus_config_path: Annotated[Optional[Path], typer.Option(
         help="Path to additional modbus server config"
     )] = None,
     randomize: int = typer.Option(

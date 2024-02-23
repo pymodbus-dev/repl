@@ -9,6 +9,7 @@ from prompt_toolkit.shortcuts import clear
 from prompt_toolkit.shortcuts.progress_bar import formatters
 from prompt_toolkit.styles import Style
 from pymodbus import __version__ as pymodbus_version
+
 from pymodbus_repl import __VERSION__ as repl_version
 
 
