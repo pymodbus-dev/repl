@@ -72,9 +72,7 @@ Invoke REPL server with `pymodbus.server run` command.
 The REPL server comes with auto-completion and can be installed for the supported shell with `pymodbus.server --install-completion <shell>`.
 Don't forget to restart the terminal for the auto-completion to kick-in. Use `TAB` key to show auto-completion.
 
-.. image:: ../../server_repl.png
-  :width: 400
-  :alt: Server in Action
+![Server in Action](../../server_repl.png)
 
 Example usage.
 
