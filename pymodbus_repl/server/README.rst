@@ -72,10 +72,14 @@ Invoke REPL server with `pymodbus.server run` command.
 The REPL server comes with auto-completion and can be installed for the supported shell with `pymodbus.server --install-completion <shell>`.
 Don't forget to restart the terminal for the auto-completion to kick-in. Use `TAB` key to show auto-completion.
 
+.. image:: ../../server_repl.png
+  :width: 400
+  :alt: Server in Action
+
 Example usage.
 
 ```shell
-✗ pymodbus.server run --modbus-server tcp --framer socket --slave-id 1 --slave-id 4 --random 2
+❯ pymodbus.server run
 
 __________                          .______.                    _________
 \______   \___.__. _____   ____   __| _/\_ |__  __ __  ______  /   _____/ ______________  __ ___________
@@ -83,29 +87,63 @@ __________                          .______.                    _________
  |    |    \___  |  Y Y  (  <_> ) /_/ |  | \_\ \  |  /\___ \   /        \  ___/|  | \/\   /\  ___/|  | \/
  |____|    / ____|__|_|  /\____/\____ |  |___  /____//____  > /_______  /\___  >__|    \_/  \___  >__|
            \/          \/            \/      \/           \/          \/     \/                 \/
+                                                                                                v2.0.2-Pymodbus3.7.0dev
+
 
 SERVER > help
 Available commands:
 clear                                        Clears screen
+config                                       Print server config
+exit                                         Exits REPL Server
 manipulator                                  Manipulate response from server.
 Usage: manipulator response_type=|normal|error|delayed|empty|stray
-        Additional parameters
-                error_code=<int>
-                delay_by=<in seconds>
-                clear_after=<clear after n messages int>
-                data_len=<length of stray data (int)>
+	Additional parameters
+		error_code=<int>
+		delay_by=<in seconds>
+		clear_after=<clear after n messages int>
+		data_len=<length of stray data (int)>
 
-        Example usage:
-        1. Send error response 3 for 4 requests
-           manipulator response_type=error error_code=3 clear_after=4
-        2. Delay outgoing response by 5 seconds indefinitely
-           manipulator response_type=delayed delay_by=5
-        3. Send empty response
-           manipulator response_type=empty
-        4. Send stray response of length 12 and revert to normal after 2 responses
-           manipulator response_type=stray data_len=11 clear_after=2
-        5. To disable response manipulation
-           manipulator response_type=normal
+	Example usage:
+	1. Send error response 3 for 4 requests
+	   manipulator response_type=error error_code=3 clear_after=4
+	2. Delay outgoing response by 5 seconds indefinitely
+	   manipulator response_type=delayed delay_by=5
+	3. Send empty response
+	   manipulator response_type=empty
+	4. Send stray response of length 12 and revert to normal after 2 responses
+	   manipulator response_type=stray data_len=11 clear_after=2
+	5. To disable response manipulation
+	   manipulator response_type=normal
+
+### View current server config
+SERVER > config
+Server Configs:
+response_type                                normal
+delay_by                                     0
+error_code                                   2
+clear_after                                  5
+
+#### Manipulate response to return error code 3 and clear error after 3 requests
+SERVER > manipulator response_type error error_code 3 clear_after 3
+
+### Config after manipulation is set.
+
+SERVER > config
+Server Configs:
+response_type                                error
+error_code                                   3
+clear_after                                  3
+SERVER > 2024-02-28 12:20:55,573 ERROR logging:115 Unknown exception "cannot unpack non-iterable ReadInputRegistersResponse object" on stream server forcing disconnect
+
+#### Config after 3 requests
+SERVER >
+SERVER > config
+Server Configs:
+response_type                                normal
+delay_by                                     0
+error_code                                   2
+clear_after                                  5
+
 ```
 
 [![Pymodbus Server REPL](https://img.youtube.com/vi/OutaVz0JkWg/maxresdefault.jpg)](https://youtu.be/OutaVz0JkWg)
