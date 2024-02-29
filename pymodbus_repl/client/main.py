@@ -9,7 +9,6 @@ from prompt_toolkit.formatted_text import HTML
 from prompt_toolkit.history import FileHistory
 from prompt_toolkit.key_binding import KeyBindings
 from prompt_toolkit.lexers import PygmentsLexer
-from prompt_toolkit.styles import Style
 from pygments.lexers.python import PythonLexer
 from pymodbus import __version__ as pymodbus_version
 from pymodbus.exceptions import ParameterException
@@ -21,12 +20,12 @@ from pymodbus.transaction import (
 )
 
 from pymodbus_repl import __VERSION__ as repl_version
-from pymodbus_repl.client.completer import (
+from pymodbus_repl.client.mclient import ModbusSerialClient, ModbusTcpClient
+from pymodbus_repl.lib.completer import (
     CmdCompleter,
     has_selected_completion,
 )
-from pymodbus_repl.client.helper import CLIENT_ATTRIBUTES, Result
-from pymodbus_repl.client.mclient import ModbusSerialClient, ModbusTcpClient
+from pymodbus_repl.lib.helper import CLIENT_ATTRIBUTES, Result, style
 
 
 _logger = logging.getLogger()
@@ -42,17 +41,6 @@ __________          _____             .___  __________              .__
                                                 v{repl_version} - Pymodbus-{pymodbus_version}
 ----------------------------------------------------------------------------
 """
-
-
-style = Style.from_dict(
-    {
-        "completion-menu.completion": "bg:#008888 #ffffff",
-        "completion-menu.completion.current": "bg:#00aaaa #000000",
-        "scrollbar.background": "bg:#88aaaa",
-        "scrollbar.button": "bg:#222222",
-    }
-)
-
 
 def bottom_toolbar():
     """Do console toolbar.
