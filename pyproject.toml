@@ -5,6 +5,7 @@ description = "REPL (Read-Eval-Print Loop) tool for working with Modbus devices 
 authors = ["dhoomakethu <otlasanju@gmail.com>"]
 readme = "README.md"
 packages = [{include = "pymodbus_repl"}]
+repository = "https://github.com/pymodbus-dev/repl"
 
 [tool.poetry.dependencies]
 python = "^3.8"
