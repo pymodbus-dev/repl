@@ -1,10 +1,11 @@
 [tool.poetry]
 name = "pymodbus_repl"
-version = "2.0.2"
+version = "2.0.3"
 description = "REPL (Read-Eval-Print Loop) tool for working with Modbus devices using the Pymodbus library."
 authors = ["dhoomakethu <otlasanju@gmail.com>"]
 readme = "README.md"
 packages = [{include = "pymodbus_repl"}]
+repository = "https://github.com/pymodbus-dev/repl"
 
 [tool.poetry.dependencies]
 python = "^3.8"
