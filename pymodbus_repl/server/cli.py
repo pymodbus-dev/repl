@@ -170,7 +170,7 @@ def print_help(command: Optional[str] = None):
         _print_help()
 
 
-def print_server_config(server: ReactiveServer, print_server_context: bool = False, *extra) -> dict:
+def print_server_config(server: ReactiveServer, print_server_context: bool = False, *extra):
     """Print server config."""
     print_formatted_text()
     print_formatted_text(HTML("<u>Server Configs:</u>"))

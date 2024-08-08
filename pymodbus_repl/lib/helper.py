@@ -74,7 +74,7 @@ style = Style.from_dict(
 )
 
 
-class Command:
+class Command(dict):
     """Class representing Commands to be consumed by Completer."""
 
     def __init__(self, name, signature, doc, slave=False):
