@@ -44,12 +44,11 @@ class ModbusServerTypes(str, Enum):
 class ModbusFramerTypes(str, Enum):
     """Framer types."""
 
-    # ["socket", "rtu", "tls", "ascii", "binary"]
+    # ["socket", "rtu", "tls", "ascii"]
     socket = "socket"  # pylint: disable=invalid-name
     rtu = "rtu"  # pylint: disable=invalid-name
     tls = "tls"  # pylint: disable=invalid-name
     ascii = "ascii"  # pylint: disable=invalid-name
-    binary = "binary"  # pylint: disable=invalid-name
 
 
 def _completer(incomplete: str, valid_values: List[str]) -> List[str]:
@@ -62,13 +61,13 @@ def _completer(incomplete: str, valid_values: List[str]) -> List[str]:
 
 
 def framers(incomplete: str) -> List[str]:
-    """Return an autocompleted list of supported clouds."""
-    _framers = ["socket", "rtu", "tls", "ascii", "binary"]
+    """Return an autocompleted list of supported framers."""
+    _framers = ["socket", "rtu", "tls", "ascii"]
     return _completer(incomplete, _framers)
 
 
 def servers(incomplete: str) -> List[str]:
-    """Return an autocompleted list of supported clouds."""
+    """Return an autocompleted list of supported servers."""
     _servers = ["tcp", "serial", "tls", "udp"]
     return _completer(incomplete, _servers)
 

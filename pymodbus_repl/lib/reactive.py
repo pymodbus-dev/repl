@@ -37,7 +37,6 @@ from pymodbus.server.async_io import (
 )
 from pymodbus.transaction import (
     ModbusAsciiFramer,
-    ModbusBinaryFramer,
     ModbusRtuFramer,
     ModbusSocketFramer,
     ModbusTlsFramer,
@@ -57,7 +56,6 @@ DEFAULT_FRAMER = {
     "tls": ModbusTlsFramer,
     "udp": ModbusSocketFramer,
     "ascii": ModbusAsciiFramer,
-    "binary": ModbusBinaryFramer,
 }
 
 DEFAULT_MANIPULATOR = {

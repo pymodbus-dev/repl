@@ -14,7 +14,6 @@ from pymodbus import __version__ as pymodbus_version
 from pymodbus.exceptions import ParameterException
 from pymodbus.transaction import (
     ModbusAsciiFramer,
-    ModbusBinaryFramer,
     ModbusRtuFramer,
     ModbusSocketFramer,
 )
@@ -381,8 +380,6 @@ def serial(  # pylint: disable=too-many-arguments
         framer = ModbusAsciiFramer
     elif method == "rtu":
         framer = ModbusRtuFramer
-    elif method == "binary":
-        framer = ModbusBinaryFramer
     elif method == "socket":
         framer = ModbusSocketFramer
     else:
