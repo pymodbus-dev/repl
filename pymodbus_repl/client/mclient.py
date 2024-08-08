@@ -6,7 +6,9 @@ from typing import TYPE_CHECKING
 from pymodbus.client import ModbusSerialClient as _ModbusSerialClient
 from pymodbus.client import ModbusTcpClient as _ModbusTcpClient
 from pymodbus.client.base import ModbusBaseSyncClient as _ModbusBaseSyncClient
-from pymodbus.diag_message import (
+from pymodbus.exceptions import ModbusIOException
+from pymodbus.pdu import ExceptionResponse, ModbusExceptions
+from pymodbus.pdu.diag_message import (
     ChangeAsciiInputDelimiterRequest,
     ClearCountersRequest,
     ClearOverrunCountRequest,
@@ -26,12 +28,11 @@ from pymodbus.diag_message import (
     ReturnSlaveNAKCountRequest,
     ReturnSlaveNoResponseCountRequest,
 )
-from pymodbus.exceptions import ModbusIOException
-from pymodbus.mei_message import (
+from pymodbus.pdu.mei_message import (
     ReadDeviceInformationRequest,
     ReadDeviceInformationResponse,
 )
-from pymodbus.other_message import (
+from pymodbus.pdu.other_message import (
     GetCommEventCounterRequest,
     GetCommEventCounterResponse,
     GetCommEventLogRequest,
@@ -41,8 +42,7 @@ from pymodbus.other_message import (
     ReportSlaveIdRequest,
     ReportSlaveIdResponse,
 )
-from pymodbus.pdu import ExceptionResponse, ModbusExceptions
-from pymodbus.register_write_message import MaskWriteRegisterResponse
+from pymodbus.pdu.register_write_message import MaskWriteRegisterResponse
 
 
 def make_response_dict(resp):
