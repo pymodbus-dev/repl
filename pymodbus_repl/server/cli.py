@@ -3,7 +3,7 @@ import functools
 import inspect
 import shutil
 from collections import defaultdict
-from typing import Optional
+from typing import Dict, Optional
 
 import click
 from prompt_toolkit import PromptSession, print_formatted_text
@@ -40,7 +40,7 @@ BOTTOM_TOOLBAR = HTML(
 )
 COMMAND_ARGS = ["response_type", "error_code", "delay_by", "clear_after", "data_len"]
 RESPONSE_TYPES = ["normal", "error", "delayed", "empty", "stray"]
-COMMANDS = {
+COMMANDS: Dict[str, Optional[Dict | Command]] = {
     "manipulator": {
         "response_type": None,
         "error_code": None,
