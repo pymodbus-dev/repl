@@ -101,9 +101,6 @@ def server(
     ctx: typer.Context,
     host: str = typer.Option("localhost", "--host", help="Host address"),
     web_port: int = typer.Option(8080, "--web-port", help="Web app port"),
-    broadcast_support: bool = typer.Option(
-        False, "-b", help="Support broadcast messages"
-    ),
     repl: bool = typer.Option(True, help="Enable/Disable repl for server"),
     verbose: bool = typer.Option(
         False, help="Run with debug logs enabled for pymodbus"
@@ -116,8 +113,7 @@ def server(
     ctx.obj = {
         "repl": repl,
         "host": host,
-        "web_port": web_port,
-        "broadcast_enable": broadcast_support,
+        "web_port": web_port
     }
 
 
