@@ -8,7 +8,7 @@ packages = [{include = "pymodbus_repl"}]
 repository = "https://github.com/pymodbus-dev/repl"
 
 [tool.poetry.dependencies]
-python = "^3.8"
+python = ">=3.9.0,<4.0"
 typer = {extras = ["all"], version = "^0.9.0"}
 prompt-toolkit = "^3.0.43"
 pygments = "^2.17.2"
