@@ -14,7 +14,6 @@ from pymodbus import __version__ as pymodbus_version
 from pymodbus.exceptions import ParameterException
 from pymodbus.transaction import (
     ModbusAsciiFramer,
-    ModbusBinaryFramer,
     ModbusRtuFramer,
     ModbusSocketFramer,
 )
@@ -222,26 +221,11 @@ class CLI:  # pylint: disable=too-few-public-methods
 @click.group("pymodbus-repl")
 @click.version_option(str(pymodbus_version), message=TITLE)
 @click.option("--verbose", is_flag=True, default=False, help="Verbose logs")
-@click.option(
-    "--broadcast-support",
-    is_flag=True,
-    default=False,
-    help="Support broadcast messages",
-)
-@click.option(
-    "--retry-on-empty", is_flag=True, default=False, help="Retry on empty response"
-)
-@click.option(
-    "--retry-on-error", is_flag=True, default=False, help="Retry on error response"
-)
 @click.option("--retries", default=3, help="Retry count")
 @click.pass_context
 def main(
     ctx,
     verbose,
-    broadcast_support,
-    retry_on_empty,
-    retry_on_error,
     retries,
 ):
     """Run Main."""
@@ -253,9 +237,6 @@ def main(
         logging.basicConfig(format=use_format)
         _logger.setLevel(logging.DEBUG)
     ctx.obj = {
-        "broadcast_enable": broadcast_support,
-        "retry_on_empty": retry_on_empty,
-        "retry_on_invalid": retry_on_error,
         "retries": retries,
     }
 
@@ -381,8 +362,6 @@ def serial(  # pylint: disable=too-many-arguments
         framer = ModbusAsciiFramer
     elif method == "rtu":
         framer = ModbusRtuFramer
-    elif method == "binary":
-        framer = ModbusBinaryFramer
     elif method == "socket":
         framer = ModbusSocketFramer
     else:
