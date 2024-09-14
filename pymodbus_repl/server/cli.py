@@ -3,7 +3,7 @@ import functools
 import inspect
 import shutil
 from collections import defaultdict
-from typing import Optional
+from typing import Dict, Optional
 
 import click
 from prompt_toolkit import PromptSession, print_formatted_text
@@ -17,6 +17,9 @@ from tabulate import tabulate
 from pymodbus_repl import __VERSION__ as repl_version
 from pymodbus_repl.lib.completer import CmdCompleter
 from pymodbus_repl.lib.helper import Command, style
+from pymodbus_repl.lib.reactive import (
+    ReactiveServer,
+)
 
 
 TITLE = r"""
@@ -37,7 +40,7 @@ BOTTOM_TOOLBAR = HTML(
 )
 COMMAND_ARGS = ["response_type", "error_code", "delay_by", "clear_after", "data_len"]
 RESPONSE_TYPES = ["normal", "error", "delayed", "empty", "stray"]
-COMMANDS = {
+COMMANDS: Dict[str, Optional[Dict | Command]] = {
     "manipulator": {
         "response_type": None,
         "error_code": None,
@@ -167,7 +170,7 @@ def print_help(command: Optional[str] = None):
         _print_help()
 
 
-def print_server_config(server: "ReactiveServer", print_server_context: bool = False, *extra) -> dict:  # noqa
+def print_server_config(server: ReactiveServer, print_server_context: bool = False, *extra):
     """Print server config."""
     print_formatted_text()
     print_formatted_text(HTML("<u>Server Configs:</u>"))
