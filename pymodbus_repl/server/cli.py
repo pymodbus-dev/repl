@@ -1,9 +1,10 @@
 """Repl server cli."""
+from __future__ import annotations
+
 import functools
 import inspect
 import shutil
 from collections import defaultdict
-from typing import Dict, Optional
 
 import click
 from prompt_toolkit import PromptSession, print_formatted_text
@@ -40,7 +41,7 @@ BOTTOM_TOOLBAR = HTML(
 )
 COMMAND_ARGS = ["response_type", "error_code", "delay_by", "clear_after", "data_len"]
 RESPONSE_TYPES = ["normal", "error", "delayed", "empty", "stray"]
-COMMANDS: Dict[str, Optional[Dict | Command]] = {
+COMMANDS: dict[str, dict | Command | None] = {
     "manipulator": {
         "response_type": None,
         "error_code": None,
@@ -78,9 +79,9 @@ COMMAND_HELPS = {
 }
 
 
-def manipulator_to_dict(response_type: str = 'normal', error_code: Optional[int] = None,
-                        delay_by: Optional[float] = None,
-                        clear_after: Optional[int] = None) -> dict:
+def manipulator_to_dict(response_type: str = 'normal', error_code: int | None = None,
+                        delay_by: float | None = None,
+                        clear_after: int | None = None) -> dict:
     """
     Manipulate response from the server.
 
@@ -147,7 +148,7 @@ def get_terminal_width():
     return shutil.get_terminal_size()[0]
 
 
-def print_help(command: Optional[str] = None):
+def print_help(command: str | None = None):
     """Print help."""
 
     def _print_formatted(cmd: str, hlp: str):
