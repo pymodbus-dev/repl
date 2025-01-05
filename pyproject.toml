@@ -28,7 +28,6 @@ version=">=3.8.6"
 include = ["pymodbus_repl"]
 
 [tool.poetry.group.dev.dependencies]
-pymodbus = {git = "https://github.com/pymodbus-dev/pymodbus", tag = "v3.7.0"}
 ruff = "^0.5.6"
 coverage = "^7.4.1"
 pytest-xdist = "^3.5.0"
@@ -37,6 +36,7 @@ twine = "^5.0.0"
 mypy = "^1.11.1"
 types-pygments = "^2.18.0.20240506"
 types-tabulate = "^0.9.0.20240106"
+pymodbus = {git = "https://github.com/pymodbus-dev/pymodbus.git", rev = "dev"}
 
 [build-system]
 requires = ["poetry-core"]

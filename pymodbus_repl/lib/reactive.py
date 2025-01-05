@@ -28,18 +28,18 @@ from pymodbus.datastore.store import (
 )
 from pymodbus.device import ModbusDeviceIdentification
 from pymodbus.logging import Log
-from pymodbus.pdu import ExceptionResponse, ModbusExceptions
-from pymodbus.server.async_io import (
+from pymodbus.pdu import ExceptionResponse
+from pymodbus.server import (
     ModbusSerialServer,
     ModbusTcpServer,
     ModbusTlsServer,
     ModbusUdpServer,
 )
-from pymodbus.transaction import (
-    ModbusAsciiFramer,
-    ModbusRtuFramer,
-    ModbusSocketFramer,
-    ModbusTlsFramer,
+from pymodbus.framer import (
+    FramerAscii,
+    FramerRTU,
+    FramerSocket,
+    FramerTLS,
 )
 
 
@@ -51,17 +51,17 @@ SERVER_MAPPER = {
 }
 
 DEFAULT_FRAMER = {
-    "tcp": ModbusSocketFramer,
-    "rtu": ModbusRtuFramer,
-    "tls": ModbusTlsFramer,
-    "udp": ModbusSocketFramer,
-    "ascii": ModbusAsciiFramer
+    "tcp": FramerSocket,
+    "rtu": FramerRTU,
+    "tls": FramerTLS,
+    "udp": FramerSocket,
+    "ascii": FramerAscii
 }
 
 DEFAULT_MANIPULATOR = {
     "response_type": "normal",  # normal, error, delayed, empty
     "delay_by": 0,
-    "error_code": ModbusExceptions.IllegalAddress,
+    "error_code": ExceptionResponse.ILLEGAL_ADDRESS,
     "clear_after": 5,  # request count
 }
 DEFAULT_MODBUS_MAP = {
@@ -149,7 +149,6 @@ class ReactiveModbusSlaveContext(ModbusSlaveContext):
         coils: BaseModbusDataBlock,
         input_registers: BaseModbusDataBlock,
         holding_registers: BaseModbusDataBlock,
-        zero_mode: bool = False,
         randomize: int = 0,
         change_rate: int = 0,
         **kwargs,
@@ -159,7 +158,6 @@ class ReactiveModbusSlaveContext(ModbusSlaveContext):
         :param coils: Coils data block
         :param input_registers: Input registers data block
         :param holding_registers: Holding registers data block
-        :param zero_mode: Enable zero mode for data blocks
         :param randomize: Randomize reads every <n> reads for DI and IR,
                           default is disabled (0)
         :param change_rate: Rate in % of registers to change for DI and IR,
@@ -173,8 +171,7 @@ class ReactiveModbusSlaveContext(ModbusSlaveContext):
             di=discrete_inputs,
             co=coils,
             ir=input_registers,
-            hr=holding_registers,
-            zero_mode=zero_mode,
+            hr=holding_registers
         )
         min_binary_value = kwargs.get("min_binary_value", 0)
         max_binary_value = kwargs.get("max_binary_value", 1)
@@ -200,8 +197,6 @@ class ReactiveModbusSlaveContext(ModbusSlaveContext):
         :param count: The number of values to retrieve
         :returns: The requested values from a:a+c
         """
-        if not self.zero_mode:
-            address += 1
         Log.debug("getValues: fc-[{}] address-{}: count-{}", fc_as_hex, address, count)
         _block_type = self.decode(fc_as_hex)
         if self._randomize > 0 and _block_type in {"d", "i"}:
@@ -463,7 +458,6 @@ class ReactiveServer:
                 **block,
                 randomize=randomize,
                 change_rate=change_rate,
-                zero_mode=True,
                 **data_block_settings,
             )
             if not single:
@@ -490,7 +484,7 @@ class ReactiveServer:
     ):
         """Create ReactiveModbusServer.
         :param server: Modbus server type (tcp, rtu, tls, udp)
-        :param framer: Modbus framer (ModbusSocketFramer, ModbusRTUFramer, ModbusTLSFramer)
+        :param framer: Modbus framer (FramerSocket, FramerRTU, FramerTLS)
         :param context: Modbus server context to use
         :param slave: Modbus slave id
         :param single: Run in single mode
