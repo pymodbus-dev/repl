@@ -12,8 +12,8 @@ from typing import List, Optional
 
 import typer
 from pymodbus import pymodbus_apply_logging_config
+from pymodbus.framer import FramerType
 from pymodbus.logging import Log
-from pymodbus.transaction import ModbusSocketFramer
 from typing_extensions import Annotated
 
 from pymodbus_repl.lib.reactive import (
@@ -165,7 +165,7 @@ def run(
     # TBD extra_args = ctx.args
     web_app_config = ctx.obj
     loop = asyncio.get_event_loop()
-    framer = DEFAULT_FRAMER.get(modbus_framer, ModbusSocketFramer)
+    framer = DEFAULT_FRAMER.get(modbus_framer, FramerType.SOCKET)
     if modbus_config_path:
         with open(modbus_config_path, encoding="utf-8") as my_file:
             modbus_config = json.load(my_file)

@@ -12,10 +12,10 @@ from prompt_toolkit.lexers import PygmentsLexer
 from pygments.lexers.python import PythonLexer
 from pymodbus import __version__ as pymodbus_version
 from pymodbus.exceptions import ParameterException
-from pymodbus.transaction import (
-    ModbusAsciiFramer,
-    ModbusRtuFramer,
-    ModbusSocketFramer,
+from pymodbus.framer import (
+    FramerAscii,
+    FramerRTU,
+    FramerSocket,
 )
 
 from pymodbus_repl import __VERSION__ as repl_version
@@ -261,7 +261,7 @@ def tcp(ctx, host, port, framer):
     kwargs = {"host": host, "port": port}
     kwargs.update(**ctx.obj)
     if framer == "rtu":
-        kwargs["framer"] = ModbusRtuFramer
+        kwargs["framer"] = FramerRTU
     client = ModbusTcpClient(**kwargs)
     cli = CLI(client)
     cli.run()
@@ -359,11 +359,11 @@ def serial(  # pylint: disable=too-many-arguments
     """Define serial communication."""
     method = method.lower()
     if method == "ascii":
-        framer = ModbusAsciiFramer
+        framer = FramerAscii
     elif method == "rtu":
-        framer = ModbusRtuFramer
+        framer = FramerRTU
     elif method == "socket":
-        framer = ModbusSocketFramer
+        framer = FramerSocket
     else:
         raise ParameterException("Invalid framer method requested")
     client = ModbusSerialClient(
