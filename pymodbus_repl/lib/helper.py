@@ -13,7 +13,8 @@ from prompt_toolkit import print_formatted_text
 from prompt_toolkit.formatted_text import HTML, PygmentsTokens
 from prompt_toolkit.styles import Style
 from pygments.lexers.data import JsonLexer
-from pymodbus.payload import BinaryPayloadDecoder, Endian
+from pymodbus.constants import Endian
+from pymodbus.payload import BinaryPayloadDecoder
 
 
 predicate = inspect.isfunction

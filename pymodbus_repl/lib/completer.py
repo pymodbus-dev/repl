@@ -1,11 +1,11 @@
-"""Command Completion for pymodbus REPL. """
+"""Command Completion for pymodbus REPL."""
 from prompt_toolkit.application.current import get_app
 
 # pylint: disable=missing-type-doc
 from prompt_toolkit.completion import Completer, Completion
 from prompt_toolkit.filters import Condition
 
-from pymodbus_repl.lib.helper import get_commands, Command
+from pymodbus_repl.lib.helper import Command, get_commands
 
 
 @Condition
