@@ -12,8 +12,8 @@ from typing import List, Optional
 
 import typer
 from pymodbus import pymodbus_apply_logging_config
-from pymodbus.logging import Log
 from pymodbus.framer import FramerType
+from pymodbus.logging import Log
 from typing_extensions import Annotated
 
 from pymodbus_repl.lib.reactive import (

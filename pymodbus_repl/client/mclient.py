@@ -12,6 +12,7 @@ from pymodbus.pdu.diag_message import (
     ChangeAsciiInputDelimiterRequest,
     ClearCountersRequest,
     ClearOverrunCountRequest,
+    DiagnosticBase,
     ForceListenOnlyModeRequest,
     GetClearModbusPlusRequest,
     RestartCommunicationsOptionRequest,
@@ -386,7 +387,7 @@ class ExtendedRequestSupport(_Base):  # pylint: disable=(too-many-public-methods
 
     def _execute_diagnostic_request(self, request):
         """Execute diagnostic request."""
-        resp: DiagnosticStatusResponse = self.execute(request)
+        resp: DiagnosticBase = self.execute(request)
         if not resp.isError():
             return {
                 "function code": resp.function_code,
